@@ -1,0 +1,1099 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Cleitinho Barber</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&family=Yellowtail&display=swap">
+<style>
+/* Ideia: papel branco com o azul do logo usado como tinta secundária.
+   A capa só tem o nome em letra cursiva e o botão Agendar; o menu aparece depois que se rola.
+   Peça viva: calendário de agendamento com horários que somem quando alguém reserva. */
+:root{
+  --paper:#FFFFFF; --mist:#F3F6FC; --mist-2:#E6EDF9; --ink:#0D1B40; --muted:#55627F;
+  --line:#DCE4F3; --line-strong:#B6C4E4;
+  --blue:#1B3B8A; --blue-deep:#10285F; --blue-night:#0A1A45; --blue-soft:#C9D6F3;
+  --on-blue:#F4F7FE; --on-blue-muted:#B8C5E6; --gold:#B8892D; --gold-soft:#F6EBD2; --ok:#1E7A4F;
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-script:"Yellowtail","Brush Script MT","Segoe Script",cursive;
+  --font-body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --maxw:1160px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.65 var(--font-body);overflow-x:clip}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+::selection{background:var(--blue);color:#fff}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:3px}
+.on-blue :focus-visible{outline-color:#fff}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border:2px solid transparent;border-radius:999px;font-weight:700;font-size:1rem;letter-spacing:.02em;text-decoration:none;cursor:pointer;transition:transform 160ms var(--ease),background-color 160ms var(--ease),border-color 160ms var(--ease),color 160ms var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn[disabled]{cursor:not-allowed;background:var(--mist-2);color:#7C89A8;transform:none}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-line{border-color:var(--line-strong);color:var(--blue)}
+.btn-white{background:#fff;color:var(--blue)}
+.btn-ghost-w{border-color:rgba(255,255,255,.4);color:#fff}
+@media (hover:hover) and (pointer:fine){
+  .btn-blue:hover{background:var(--blue-deep)}
+  .btn-line:hover{border-color:var(--blue)}
+  .btn-white:hover{background:var(--mist-2)}
+  .btn-ghost-w:hover{border-color:#fff}
+}
+
+/* Cabeçalho: escondido na capa, aparece ao rolar */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px);transform:translateY(-110%);transition:transform 320ms var(--ease);visibility:hidden}
+.site-header.show{transform:none;visibility:visible}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-logo{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.brand-name{font:400 1.9rem/1 var(--font-script);color:var(--blue);padding-top:4px}
+.nav-links{display:none}
+.menu-btn{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:48px;height:48px;padding:0 12px;background:transparent;border:0;border-radius:8px;cursor:pointer}
+.menu-btn span{display:block;height:2px;background:var(--blue);border-radius:2px;transition:transform 200ms var(--ease),opacity 200ms var(--ease)}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-panel{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);padding-block:6px 20px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:transform 200ms var(--ease),opacity 200ms var(--ease),visibility 0s linear 200ms}
+.nav-panel.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.nav-panel a.link{display:flex;align-items:center;min-height:54px;font:600 1.9rem/1 var(--font-display);text-decoration:none;color:var(--blue)}
+.nav-panel .btn{width:100%;margin-top:12px}
+@media (min-width:860px){
+  .menu-btn,.nav-panel{display:none}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a.link{font-size:.95rem;font-weight:600;text-decoration:none;color:var(--muted);transition:color 160ms var(--ease)}
+  .nav-links .btn{min-height:44px;padding:0 22px;font-size:.95rem}
+}
+@media (hover:hover) and (pointer:fine){.nav-links a.link:hover{color:var(--blue)}}
+
+/* Capa */
+.cover{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100svh;padding-block:calc(40px + env(safe-area-inset-top,0px)) 70px;text-align:center;background:var(--paper);overflow:hidden}
+.cover-ring{position:absolute;left:50%;top:50%;width:min(130vw,880px);aspect-ratio:1;transform:translate(-50%,-52%);border-radius:50%;background:var(--mist);z-index:0}
+.cover-ring.r2{width:min(92vw,620px);background:var(--mist-2)}
+.cover-in{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;max-width:100%;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.cv-logo{width:clamp(96px,22vw,128px);height:clamp(96px,22vw,128px);border-radius:50%;object-fit:cover;border:4px solid #fff}
+.cv-name{display:block;margin-top:22px;font:400 clamp(4.6rem,22vw,9.6rem)/.98 var(--font-script);color:var(--blue);padding:.04em .1em .08em}
+.cv-sub{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:-.02em}
+.cv-sub svg{width:clamp(70px,16vw,150px);height:auto;color:var(--blue);transform-origin:left center}
+.cv-sub span{font:600 clamp(1.1rem,3.4vw,1.7rem)/1 var(--font-display);letter-spacing:.5em;text-transform:uppercase;padding-left:.5em;color:var(--ink)}
+.cv-cta{margin-top:44px;min-height:62px;padding:0 56px;font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase}
+.cv-more{position:absolute;left:50%;bottom:max(22px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:44px;font-size:.85rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.cv-more svg{width:18px;height:18px}
+.stripes{position:absolute;left:0;right:0;bottom:0;height:10px;overflow:hidden;z-index:1}
+.stripes::before{content:"";position:absolute;inset:0 auto 0 0;width:calc(100% + 68px);background:repeating-linear-gradient(-45deg,var(--blue) 0 12px,#fff 12px 24px,var(--gold) 24px 36px,#fff 36px 48px);animation:slide 3.4s linear infinite}
+@keyframes slide{to{transform:translateX(-67.88px)}}
+
+/* Seções */
+.section{padding-block:clamp(72px,10vw,120px)}
+.tint{background:var(--mist)}
+.section-head{max-width:720px;margin-bottom:clamp(32px,5vw,56px)}
+.section-head h2{font:600 clamp(2.6rem,7vw,4.6rem)/.98 var(--font-display);color:var(--blue);text-wrap:balance}
+.section-head h2 i{font-weight:500}
+.section-head .lead{margin-top:16px;max-width:54ch;font-size:1.1rem;color:var(--muted)}
+.on-blue .section-head h2{color:#fff}
+.on-blue .section-head .lead{color:var(--on-blue-muted)}
+
+/* Menu de serviços */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.chip{min-height:46px;padding:0 22px;background:#fff;border:1.5px solid var(--line-strong);border-radius:999px;font-weight:700;font-size:.95rem;color:var(--blue);cursor:pointer;transition:background-color 160ms var(--ease),border-color 160ms var(--ease),color 160ms var(--ease),transform 160ms var(--ease)}
+.chip:active{transform:scale(.97)}
+.chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+@media (hover:hover) and (pointer:fine){.chip[aria-pressed="false"]:hover{border-color:var(--blue)}}
+.cards{display:grid;gap:16px;grid-template-columns:1fr}
+.cards>li{display:flex;min-width:0}
+.cards>li>.card{width:100%}
+.cards>li.span-feature{grid-column:1/-1}
+@media (min-width:640px){.span-feature .card{flex-direction:row;flex-wrap:wrap;align-items:center;gap:20px 28px}.span-feature .card-desc{flex:1 1 280px;max-width:52ch}.span-feature .card-name{flex:0 1 auto}.span-feature .card-foot{margin-top:0;flex:1 1 220px;justify-content:flex-end;gap:28px}}
+@media (min-width:640px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:980px){.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
+.card{position:relative;display:flex;flex-direction:column;gap:14px;min-width:0;padding:26px 24px 22px;background:#fff;border:1.5px solid var(--line);border-radius:20px;text-align:left;cursor:pointer;transition:transform 200ms var(--ease),border-color 200ms var(--ease),background-color 200ms var(--ease)}
+.card:active{transform:scale(.985)}
+.card[aria-pressed="true"]{border-color:var(--blue);background:var(--mist-2)}
+@media (hover:hover) and (pointer:fine){.card:hover{border-color:var(--blue);transform:translateY(-3px)}.card:active{transform:scale(.985)}}
+.card-ic{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--mist-2);color:var(--blue);transition:background-color 200ms var(--ease),color 200ms var(--ease)}
+.card[aria-pressed="true"] .card-ic{background:var(--blue);color:#fff}
+.card-ic svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.card-name{font:600 1.9rem/1.05 var(--font-display);color:var(--ink)}
+.card-desc{color:var(--muted);font-size:.98rem;line-height:1.55;max-width:34ch}
+.card-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:auto;padding-top:6px}
+.card-price{font:700 2.3rem/1 var(--font-display);color:var(--blue);font-variant-numeric:tabular-nums}
+.card-price small{font:600 1rem var(--font-body);margin-right:4px}
+.card-time{display:block;font-size:.85rem;font-weight:600;color:var(--muted);margin-top:4px}
+.card-pick{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line-strong);font-size:.9rem;font-weight:700;color:var(--blue);white-space:nowrap;transition:background-color 160ms var(--ease),color 160ms var(--ease),border-color 160ms var(--ease)}
+.card[aria-pressed="true"] .card-pick{background:var(--blue);border-color:var(--blue);color:#fff}
+.card-pick svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;display:none}
+.card[aria-pressed="true"] .card-pick svg{display:block}
+.card.feature{background:var(--blue);border-color:var(--blue);color:#fff}
+.card.feature .card-ic{background:rgba(255,255,255,.16);color:#fff}
+.card.feature .card-name{color:#fff}
+.card.feature .card-desc,.card.feature .card-time{color:var(--on-blue-muted)}
+.card.feature .card-price{color:#fff}
+.card.feature .card-pick{border-color:rgba(255,255,255,.45);color:#fff}
+.card.feature[aria-pressed="true"]{background:var(--blue-deep)}
+.card.feature[aria-pressed="true"] .card-ic{background:#fff;color:var(--blue)}
+.card.feature[aria-pressed="true"] .card-pick{background:#fff;border-color:#fff;color:var(--blue)}
+.card .tag{position:absolute;right:20px;top:20px;padding:4px 12px;border-radius:999px;background:var(--gold-soft);color:#6B4D12;font-size:.8rem;font-weight:700}
+.card.feature .tag{background:#fff;color:var(--blue)}
+.tray{position:sticky;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-top:28px;padding:14px 16px 14px 22px;border-radius:999px;background:var(--blue-night);color:#fff;box-shadow:0 18px 36px -14px rgba(10,26,69,.5)}
+.tray b{font:600 1.5rem/1.1 var(--font-display)}
+.tray span{display:block;font-size:.88rem;color:var(--on-blue-muted)}
+.tray .btn{min-height:46px;padding:0 24px}
+@media (max-width:520px){.tray{border-radius:24px}.tray .btn{width:100%}}
+
+/* Agendamento */
+.book-grid{display:grid;gap:20px}
+@media (min-width:980px){.book-grid{grid-template-columns:minmax(0,1.55fr) minmax(0,.9fr);gap:28px;align-items:start}}
+.step{padding:clamp(22px,3.5vw,34px);background:#fff;border:1.5px solid var(--line);border-radius:22px;min-width:0}
+.step+.step{margin-top:16px}
+.step h3{display:flex;align-items:center;gap:12px;margin-bottom:18px;font:600 1.8rem/1 var(--font-display);color:var(--blue)}
+.step h3 em{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;background:var(--blue);color:#fff;font:700 .95rem/1 var(--font-body);font-style:normal}
+.pick-list{display:flex;flex-wrap:wrap;gap:10px}
+.pick{min-height:46px;padding:0 18px;background:#fff;border:1.5px solid var(--line-strong);border-radius:999px;font-weight:600;font-size:.95rem;cursor:pointer;transition:background-color 160ms var(--ease),border-color 160ms var(--ease),color 160ms var(--ease),transform 160ms var(--ease)}
+.pick:active{transform:scale(.97)}
+.pick b{color:var(--blue);margin-left:6px}
+.pick[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.pick[aria-pressed="true"] b{color:#fff}
+@media (hover:hover) and (pointer:fine){.pick[aria-pressed="false"]:hover{border-color:var(--blue)}}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-title{font:600 1.7rem/1 var(--font-display);text-transform:capitalize}
+.cal-nav{display:flex;gap:6px}
+.cal-nav button{display:grid;place-items:center;width:44px;height:44px;background:#fff;border:1.5px solid var(--line-strong);border-radius:50%;cursor:pointer;color:var(--blue);transition:transform 160ms var(--ease),border-color 160ms var(--ease)}
+.cal-nav button:active{transform:scale(.94)}
+.cal-nav button[disabled]{opacity:.35;cursor:not-allowed}
+.cal-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal-dow{padding:6px 0;text-align:center;font-size:.8rem;font-weight:700;color:var(--muted)}
+.day{aspect-ratio:1;min-height:44px;display:grid;place-items:center;background:transparent;border:1.5px solid transparent;border-radius:50%;font-weight:600;font-variant-numeric:tabular-nums;cursor:pointer;transition:background-color 160ms var(--ease),color 160ms var(--ease),transform 160ms var(--ease)}
+.day:active{transform:scale(.94)}
+.day[disabled]{color:#A5B0CA;cursor:not-allowed;text-decoration:line-through;text-decoration-color:rgba(165,176,202,.6);transform:none}
+.day.today{border-color:var(--gold)}
+.day[aria-pressed="true"]{background:var(--blue);color:#fff;border-color:var(--blue)}
+@media (hover:hover) and (pointer:fine){.day:not([disabled]):not([aria-pressed="true"]):hover{background:var(--mist-2)}}
+.cal-legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:.88rem;color:var(--muted)}
+.cal-legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.slot{min-height:46px;background:#fff;border:1.5px solid var(--line-strong);border-radius:12px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--blue);cursor:pointer;transition:background-color 160ms var(--ease),color 160ms var(--ease),border-color 160ms var(--ease),transform 160ms var(--ease)}
+.slot:active{transform:scale(.96)}
+.slot[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.slot[disabled]{background:var(--mist);border-color:var(--line);color:#9AA6C3;text-decoration:line-through;cursor:not-allowed;transform:none}
+@media (hover:hover) and (pointer:fine){.slot:not([disabled]):not([aria-pressed="true"]):hover{border-color:var(--blue)}}
+.hint{padding:18px;border-radius:14px;background:var(--mist);color:var(--muted);font-size:.98rem}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label{font-weight:700;font-size:.92rem}
+.field input{width:100%;min-height:52px;padding:0 16px;background:#fff;border:1.5px solid var(--line-strong);border-radius:12px;transition:border-color 160ms var(--ease)}
+.field input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,59,138,.18)}
+.field input[aria-invalid="true"]{border-color:#B3261E}
+.field small{color:#B3261E;min-height:1.2em;font-size:.85rem}
+.summary{position:relative;padding:clamp(22px,3.5vw,30px);border-radius:22px;background:var(--blue);color:#fff;min-width:0}
+.book-grid>*{min-width:0}
+.side{display:contents}
+.summary{order:1}
+.refs{order:-1;min-width:0}
+@media (min-width:980px){.side{display:block;position:sticky;top:88px}.summary{order:0}.refs{margin-top:16px}}
+.refs h3{margin-bottom:12px;font:600 1.5rem/1.1 var(--font-display);color:var(--blue)}
+.refs-list{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-bottom:4px}
+.ref{position:relative;flex:0 0 140px;aspect-ratio:4/5;padding:0;border:0;border-radius:14px;overflow:hidden;background:var(--mist-2);cursor:pointer;scroll-snap-align:start;transition:transform 160ms var(--ease)}
+.ref:active{transform:scale(.97)}
+.ref img{display:block;width:100%;height:100%;object-fit:cover}
+.ref span{position:absolute;left:8px;bottom:8px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--blue);font-size:.78rem;font-weight:700}
+.ref[aria-pressed="true"]{outline:3px solid var(--blue);outline-offset:-3px}
+.refs-note{font-size:.85rem;color:var(--muted)}
+@media (min-width:980px){.refs-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}.ref{flex:none}}
+.barbers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:640px){.barbers{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.bb{display:flex;flex-direction:column;align-items:center;gap:8px;min-height:120px;padding:16px 8px;background:#fff;border:1.5px solid var(--line-strong);border-radius:16px;font-weight:700;font-size:.92rem;text-align:center;cursor:pointer;transition:background-color 160ms var(--ease),border-color 160ms var(--ease),color 160ms var(--ease),transform 160ms var(--ease)}
+.bb:active{transform:scale(.97)}
+.bb-av{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--mist-2);color:var(--blue);transition:background-color 160ms var(--ease),color 160ms var(--ease)}
+.bb-av svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.bb[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.bb[aria-pressed="true"] .bb-av{background:rgba(255,255,255,.18);color:#fff}
+@media (hover:hover) and (pointer:fine){.bb[aria-pressed="false"]:hover{border-color:var(--blue)}}
+.summary h3{font:600 1.9rem/1 var(--font-display)}
+.sum-rows{margin:18px 0;display:grid;gap:12px}
+.sum-row{display:flex;justify-content:space-between;gap:16px;font-size:.98rem}
+.sum-row dt{color:var(--on-blue-muted)}
+.sum-row dd{font-weight:700;text-align:right;min-width:0;overflow-wrap:anywhere}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:16px;border-top:1px solid rgba(255,255,255,.24);margin-bottom:20px}
+.sum-total b{font:700 2.6rem/1 var(--font-display);font-variant-numeric:tabular-nums}
+.summary .btn{width:100%}
+.sum-note{margin-top:12px;font-size:.86rem;color:var(--on-blue-muted)}
+.msg{margin-top:14px;padding:14px 16px;border-radius:12px;font-size:.95rem;background:#FDECEA;color:#7A1812}
+.msg a{font-weight:700}
+.ok-card{padding:clamp(28px,5vw,48px);border-radius:24px;background:#fff;border:1.5px solid var(--line);text-align:center}
+.ok-ic{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 18px;border-radius:50%;background:var(--blue);color:#fff}
+.ok-ic svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.ok-card h3{font:600 clamp(2.2rem,6vw,3.2rem)/1 var(--font-display);color:var(--blue)}
+.ok-when{margin:16px 0 6px;font:600 1.8rem/1.2 var(--font-display)}
+.ok-sub{color:var(--muted);max-width:48ch;margin-inline:auto}
+.ok-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+
+/* Trabalho */
+.mosaic{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ph{position:relative;margin:0;overflow:hidden;border-radius:18px;background:var(--mist-2);aspect-ratio:4/5}
+.ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 500ms var(--ease)}
+.ph figcaption{position:absolute;left:12px;bottom:12px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--blue);font-size:.85rem;font-weight:700}
+.ph.big{grid-column:1/-1;aspect-ratio:4/3}
+@media (hover:hover) and (pointer:fine){.ph:hover img{transform:scale(1.04)}}
+@media (min-width:860px){
+  .mosaic{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+  .ph{grid-column:span 2;aspect-ratio:4/5}
+  .ph.big{grid-column:span 3;grid-row:span 2;aspect-ratio:auto;min-height:100%}
+  .ph.wide{grid-column:span 3;aspect-ratio:16/10}
+}
+.mosaic-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin-top:24px}
+.mosaic-foot p{max-width:52ch;color:var(--muted)}
+.proc-title{margin:clamp(56px,8vw,96px) 0 28px;font:600 clamp(2rem,5vw,3rem)/1 var(--font-display);color:var(--blue)}
+.proc{display:grid;gap:28px}
+@media (min-width:900px){.proc{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}}
+.proc li{position:relative;padding-top:24px}
+.proc li::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;border-radius:2px;background:var(--mist-2)}
+.proc-fill{position:absolute;inset:0 0 auto 0;height:4px;border-radius:2px;background:var(--gold);transform-origin:left center}
+.proc h4{margin-bottom:6px;font:600 1.7rem/1.1 var(--font-display)}
+.proc p{color:var(--muted);max-width:34ch}
+
+/* Endereço */
+.addr-grid{display:grid;gap:36px}
+@media (min-width:900px){.addr-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:60px;align-items:stretch}}
+.info{display:grid;gap:28px}
+.info h3{margin-bottom:8px;font:700 .98rem/1.2 var(--font-body);color:var(--blue)}
+.address{font:600 2.2rem/1.1 var(--font-display)}
+.address span{display:block;margin-top:4px;color:var(--muted);font:500 1.05rem/1.5 var(--font-body)}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours th,.hours td{padding:12px 0;border-bottom:1px solid var(--line);text-align:left;font-weight:500}
+.hours td{text-align:right;color:var(--muted)}
+.hours tr.today th,.hours tr.today td{color:var(--ink);font-weight:700}
+.hours tr.today th::after{content:"hoje";margin-left:10px;padding:2px 10px;border-radius:999px;background:var(--blue);color:#fff;font-size:.8rem}
+.contact-line{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.phone{font:700 1.9rem/1 var(--font-display);user-select:all}
+.copy{min-height:44px;padding:0 18px;background:#fff;border:1.5px solid var(--line-strong);border-radius:999px;font-weight:700;font-size:.92rem;color:var(--blue);cursor:pointer;transition:transform 160ms var(--ease),border-color 160ms var(--ease)}
+.copy:active{transform:scale(.97)}
+.map-card{display:flex;flex-direction:column;min-width:0;border-radius:22px;overflow:hidden;background:#fff;border:1.5px solid var(--line)}
+.map-card svg{display:block;width:100%;height:auto;flex:1;min-height:280px}
+.map-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px}
+.map-foot p{font-weight:600}
+.m-street{fill:#EAF0FB}.m-block{fill:#FFFFFF}.m-water{fill:#C9D6F3}.m-ave{stroke:#EAF0FB;fill:none}
+.m-label{font:600 9px var(--font-body);fill:#55627F}
+.m-pin{fill:#1B3B8A;stroke:#fff;stroke-width:2}.m-dot{fill:#fff}
+
+/* Contato */
+.contact{position:relative;overflow:hidden;background:var(--blue-deep);color:#fff}
+.contact-grid{display:grid;gap:16px}
+@media (min-width:900px){.contact-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}}
+.panel{display:flex;flex-direction:column;gap:12px;min-width:0;padding:clamp(24px,4vw,38px);border-radius:24px;text-decoration:none;transition:transform 200ms var(--ease),background-color 200ms var(--ease)}
+.panel:active{transform:scale(.985)}
+.panel svg.ic{width:42px;height:42px;flex:none}
+.panel-title{font:600 clamp(2.2rem,5.5vw,3rem)/1 var(--font-display)}
+.panel-text{max-width:40ch}
+.panel-go{display:inline-flex;align-items:center;gap:10px;margin-top:auto;padding-top:10px;font-weight:700}
+.panel-go svg{width:20px;height:20px;transition:transform 200ms var(--ease)}
+.panel-wa{background:#fff;color:var(--blue)}
+.panel-wa .panel-text{color:var(--muted)}
+.panel-ig{background:var(--blue);color:#fff}
+.panel-ig .panel-text{color:var(--on-blue-muted)}
+.panel-ig .handle{font:400 1.9rem/1 var(--font-script)}
+@media (hover:hover) and (pointer:fine){.panel-wa:hover{background:var(--mist-2)}.panel-ig:hover{background:#2347A6}.panel:hover .panel-go svg{transform:translateX(5px)}}
+
+.footer{background:var(--blue-night);color:#fff;padding-block:clamp(48px,7vw,76px) 34px;overflow:hidden}
+.footer-name{display:block;font:400 clamp(5rem,24vw,15rem)/.88 var(--font-script);padding:.04em .1em .1em 0;white-space:nowrap}
+.footer-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;margin-top:18px;font-size:.95rem;color:var(--on-blue-muted)}
+.footer-links{display:flex;flex-wrap:wrap;gap:6px 22px}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.35);transition:text-decoration-color 160ms var(--ease)}
+@media (hover:hover) and (pointer:fine){.footer-links a:hover{text-decoration-color:#fff}}
+
+/* Fluxo de agendamento em tela cheia */
+html.flow-open{overflow:hidden}
+[hidden]{display:none!important}
+.flow{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;background:#fff;padding-top:env(safe-area-inset-top,0px);opacity:0;transform:translateY(24px);transition:opacity 260ms var(--ease),transform 260ms var(--ease)}
+.flow.open{opacity:1;transform:none}
+.flow-top{display:flex;align-items:center;gap:12px;padding:10px max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px));max-width:1040px;width:100%;margin-inline:auto}
+.flow-head{flex:1;min-width:0;text-align:center}
+.flow-count{display:block;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.flow-head h2{font:600 clamp(1.7rem,5vw,2.3rem)/1.05 var(--font-display);color:var(--blue);outline:none}
+.flow-btn{display:grid;place-items:center;width:48px;height:48px;flex:none;background:var(--mist);border:0;border-radius:50%;color:var(--blue);cursor:pointer;transition:transform 160ms var(--ease),background-color 160ms var(--ease)}
+.flow-btn:active{transform:scale(.94)}
+.flow-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (hover:hover) and (pointer:fine){.flow-btn:hover{background:var(--mist-2)}}
+.flow-prog{height:4px;background:var(--mist-2)}
+.flow-prog span{display:block;height:100%;width:25%;background:var(--blue);border-radius:0 4px 4px 0;transition:width 360ms var(--ease)}
+.flow-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.flow-in{max-width:1040px;margin-inline:auto;padding:22px max(16px,env(safe-area-inset-right,0px)) 36px max(16px,env(safe-area-inset-left,0px))}
+.fstep{animation:stepIn 320ms var(--ease)}
+@keyframes stepIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.flow-foot{border-top:1px solid var(--line);background:#fff;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.flow-foot-in{max-width:1040px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.flow-sum{min-width:0}
+.flow-sum b{display:block;font:700 1.9rem/1 var(--font-display);color:var(--blue);font-variant-numeric:tabular-nums}
+.flow-sum span{display:block;font-size:.85rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.flow-foot .btn{min-width:170px}
+@media (max-width:420px){.flow-foot .btn{min-width:0;padding:0 22px}}
+
+/* Passo 1 */
+.f1{display:grid;gap:22px}
+.f1>*{min-width:0}
+@media (min-width:980px){.f1{grid-template-columns:minmax(0,1fr) 250px;gap:28px;align-items:start}.f1 .refs{order:0;margin-top:0;position:sticky;top:0}}
+.flow .filters{margin-bottom:18px}
+.flow .cards{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.flow .cards>li.span-feature{grid-column:1/-1}
+.flow .card{padding:22px 20px 18px}
+.flow .card-name{font-size:1.7rem}
+
+/* Passo 2: barbeiros em carrossel */
+.swipe-hint{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px;font-size:.95rem;font-weight:600;color:var(--muted);text-align:center}
+.swipe-hint svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--blue);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:nudge 1.6s var(--ease) infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+.swipe{position:relative}
+.swipe-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:20px calc(50% - min(40vw,150px)) 28px}
+.swipe-track::-webkit-scrollbar{display:none}
+.bcard{flex:0 0 min(80vw,300px);scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 20px 22px;border:2px solid var(--line);border-radius:30px;background:var(--mist);text-align:center;cursor:pointer;transform:scale(var(--s,.9));opacity:var(--o,.7);transition:background-color 200ms var(--ease),border-color 200ms var(--ease),color 200ms var(--ease)}
+.bcard.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.bart{width:100%;aspect-ratio:1;max-width:210px;border-radius:50%;background:#fff;overflow:hidden;margin-bottom:10px}
+.bcard.on .bart{background:var(--blue-soft)}
+.bart svg{display:block;width:100%;height:100%}
+.bcard h3{font:600 2.3rem/1 var(--font-display)}
+.bcard p{font-size:.92rem;color:var(--muted)}
+.bcard.on p{color:var(--on-blue-muted)}
+.bpick{margin-top:12px;min-height:46px;padding:0 26px;border:2px solid var(--blue);border-radius:999px;background:transparent;color:var(--blue);font-weight:700;cursor:pointer;transition:background-color 160ms var(--ease),color 160ms var(--ease),transform 160ms var(--ease)}
+.bpick:active{transform:scale(.97)}
+.bcard.on .bpick{background:#fff;border-color:#fff;color:var(--blue)}
+.swipe-dots{display:flex;justify-content:center;gap:8px}
+.swipe-dots i{width:8px;height:8px;border-radius:50%;background:var(--line-strong);transition:width 220ms var(--ease),background-color 220ms var(--ease)}
+.swipe-dots i.cur{width:26px;border-radius:4px;background:var(--blue)}
+.sw-arrow{display:none}
+@media (min-width:760px){.sw-arrow{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:52px;height:52px;margin-top:-26px;border:0;border-radius:50%;background:#fff;color:var(--blue);box-shadow:0 8px 20px rgba(10,26,69,.18);cursor:pointer;transition:transform 160ms var(--ease)}.sw-arrow:active{transform:scale(.94)}.sw-arrow.l{left:4px}.sw-arrow.r{right:4px}.sw-arrow svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}}
+
+/* Passo 3 e 4 */
+.f3,.f4{display:grid;gap:16px}
+.f3>*,.f4>*{min-width:0}
+@media (min-width:860px){.f3,.f4{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}}
+.fcard{padding:clamp(20px,3vw,28px);background:#fff;border:1.5px solid var(--line);border-radius:22px}
+.fcard-t{margin-bottom:14px;font:600 1.7rem/1 var(--font-display);color:var(--blue)}
+
+/* Concluído */
+.fdone{display:flex;flex-direction:column;align-items:center;text-align:center;padding-block:clamp(16px,6vw,48px)}
+.fdone[hidden]{display:none}
+.done-ic{width:112px;height:112px;margin-bottom:22px}
+.done-ic svg{width:100%;height:100%;fill:none;stroke:var(--ok);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.done-ic circle{fill:#E3F4EA;stroke-dasharray:145;stroke-dashoffset:145;animation:draw 700ms var(--ease) forwards}
+.done-ic path{stroke-dasharray:44;stroke-dashoffset:44;animation:draw 500ms var(--ease) 450ms forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done-t{font:600 clamp(2.4rem,8vw,3.8rem)/1 var(--font-display);color:var(--ok);outline:none}
+.done-when{margin-top:12px;font:600 1.7rem/1.2 var(--font-display)}
+.done-rows{display:grid;gap:10px;width:min(100%,420px);margin:22px 0 4px;padding:18px 20px;border-radius:18px;background:#EEF8F2;text-align:left}
+.done-rows div{display:flex;justify-content:space-between;gap:16px}
+.done-rows dt{color:#3F6B55}
+.done-rows dd{font-weight:700;text-align:right;min-width:0;overflow-wrap:anywhere}
+.done-note{max-width:44ch;margin-top:14px;color:var(--muted)}
+.done-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+.btn-ok{background:var(--ok);color:#fff}
+@media (hover:hover) and (pointer:fine){.btn-ok:hover{background:#176240}}
+@media (prefers-reduced-motion:reduce){.fstep,.swipe-hint svg{animation:none}.done-ic circle,.done-ic path{animation:none;stroke-dashoffset:0}.flow{transition:none}}
+
+.diffs{display:grid;gap:14px}
+@media (min-width:700px){.diffs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){.diffs{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}}
+.diffs li{display:flex;gap:16px;align-items:flex-start;min-width:0;padding:24px 22px;background:#fff;border:1.5px solid var(--line);border-radius:22px}
+.diff-ic{display:grid;place-items:center;width:52px;height:52px;flex:none;border-radius:50%;background:var(--blue);color:#fff}
+.diff-ic svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.diffs h3{font:600 1.7rem/1.1 var(--font-display);color:var(--blue)}
+.diffs p{margin-top:6px;color:var(--muted);font-size:.98rem;line-height:1.55}
+/* Estados iniciais de animação */
+.anim .cv-fade,.anim [data-reveal]{opacity:0}
+.anim .cv-name{clip-path:inset(-25% 100% -25% -5%)}
+.anim .cv-sub svg{transform:scaleX(0)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.stripes::before{animation:none}*{transition-duration:0ms!important}}
+</style>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim');</script>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap bar">
+    <a class="brand" href="#topo" aria-label="Cleitinho Barber, início">
+      <img class="brand-logo" src="logo.jpg" width="40" height="40" alt="">
+      <span class="brand-name">Cleitinho Barber</span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a class="link" href="#trabalho">Trabalho</a>
+      <a class="link" href="#endereco">Endereço</a>
+      <a class="link" href="#contato">Contato</a>
+      <a class="btn btn-blue" href="#agendar">Agendar</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-panel" id="navPanel">
+    <div class="wrap">
+      <a class="link" href="#trabalho">Trabalho</a>
+      <a class="link" href="#endereco">Endereço</a>
+      <a class="link" href="#contato">Contato</a>
+      <a class="btn btn-blue" href="#agendar">Agendar horário</a>
+    </div>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="cover" aria-label="Cleitinho Barber">
+    <div class="cover-ring" aria-hidden="true"></div>
+    <div class="cover-ring r2" aria-hidden="true"></div>
+    <div class="cover-in">
+      <img class="cv-logo cv-fade" src="logo.jpg" width="128" height="128" alt="Logo da Cleitinho Barber">
+      <h1 class="cv-title" aria-label="Cleitinho Barber">
+        <span class="cv-name" aria-hidden="true">Cleitinho</span>
+        <span class="cv-sub" aria-hidden="true">
+          <svg viewBox="0 0 240 24"><path d="M0 21C26 8 64 2 112 2C150 2 190 6 240 14C196 10 156 9 114 11C68 13 30 17 0 21Z" fill="currentColor"/><path d="M26 22C60 15 104 13 150 16C112 17 70 19 26 22Z" fill="currentColor"/></svg>
+          <span>Barber</span>
+        </span>
+      </h1>
+      <a class="btn btn-blue cv-cta cv-fade" href="#agendar">Agendar</a>
+    </div>
+    <a class="cv-more cv-fade" href="#trabalho">Conheça
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+    <div class="stripes" aria-hidden="true"></div>
+  </section>
+
+  <!-- TRABALHO -->
+  <section class="section tint" id="trabalho" aria-labelledby="trab-t">
+    <div class="wrap">
+      <header class="section-head" data-reveal>
+        <h2 id="trab-t">Seu melhor estilo é <i>aqui</i></h2>
+        <p class="lead">O que faz a Cleitinho Barber ser diferente de uma barbearia qualquer.</p>
+      </header>
+      <ul class="diffs" data-reveal>
+        <li><span class="diff-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><div><h3>Hora marcada de verdade</h3><p>Você escolhe o dia, o horário e o barbeiro direto no site. Chegou na hora, foi atendido.</p></div></li>
+        <li><span class="diff-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c.8-4 3.4-5.5 6.5-5.5s5.7 1.5 6.5 5.5M16 14.5c3 0 4.8 1.4 5.5 4.5"/></svg></span><div><h3>Quatro barbeiros</h3><p>Cada cliente escolhe com quem quer cortar e pode voltar sempre com o mesmo profissional.</p></div></li>
+        <li><span class="diff-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18h12M8 14c-2-2 2-3 0-6M12 14c-2-2 2-3 0-6M16 14c-2-2 2-3 0-6"/></svg></span><div><h3>Toalha quente e navalha</h3><p>A barba amolece no vapor, o contorno sai na navalha e o acabamento dura mais.</p></div></li>
+        <li><span class="diff-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12V9a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M3 12a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v5H3z"/><path d="M6 17v2M18 17v2"/></svg></span><div><h3>Ambiente pensado para você</h3><p>Espaço climatizado, poltronas confortáveis e TV para esperar à vontade.</p></div></li>
+        <li><span class="diff-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14c1 1.5 2.2 2.2 3.5 2.2s2.5-.7 3.5-2.2M9 9.5v.5M15 9.5v.5"/></svg></span><div><h3>Atendimento para a família</h3><p>Do pai ao filho, com paciência para os pequenos e o corte certo para cada idade.</p></div></li>
+        <li><span class="diff-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/><rect x="3" y="3" width="18" height="18" rx="4"/></svg></span><div><h3>Você aprova antes de sair</h3><p>Antes de terminar, você confere no espelho e a gente ajusta até ficar do seu jeito.</p></div></li>
+      </ul>
+
+      <h3 class="proc-title" style="margin-top:clamp(56px,8vw,96px)">Cortes feitos aqui</h3>
+      <div class="mosaic">
+        <figure class="ph big"><img src="corte2.jpg" alt="Degradê alto com topete penteado e barba cheia" style="object-position:50% 38%"><figcaption>Degradê e barba</figcaption></figure>
+        <figure class="ph"><img src="corte1.jpg" alt="Corte baixo com risquinho desenhado na lateral"><figcaption>Risquinho</figcaption></figure>
+        <figure class="ph"><img src="corte3.jpg" alt="Degradê com topete texturizado"><figcaption>Degradê</figcaption></figure>
+        <figure class="ph"><img src="corte4.jpg" alt="Corte com risco na navalha e degradê alto"><figcaption>Risco na navalha</figcaption></figure>
+        <figure class="ph"><img src="corte5.jpg" alt="Tranças com degradê e desenho na lateral"><figcaption>Tranças e degradê</figcaption></figure>
+      </div>
+      <div class="mosaic-foot" data-reveal>
+        <p>Veja mais cortes e o antes e depois no Instagram, com trabalho novo toda semana.</p>
+        <a class="btn btn-line" href="https://www.instagram.com/cleitinbarber/" target="_blank" rel="noopener">Ver no Instagram</a>
+      </div>
+
+      <h3 class="proc-title" data-reveal>Como é o atendimento</h3>
+      <ol class="proc">
+        <li><span class="proc-fill"></span><h4>Conversa</h4><p>Você mostra a referência. A gente ajusta ao formato do rosto e ao tipo de cabelo.</p></li>
+        <li><span class="proc-fill"></span><h4>Corte</h4><p>Tesoura, máquina e pente, com atenção às laterais e à nuca.</p></li>
+        <li><span class="proc-fill"></span><h4>Toalha e navalha</h4><p>Toalha quente para amolecer a barba, depois contorno e acabamento na navalha.</p></li>
+        <li><span class="proc-fill"></span><h4>Finalização</h4><p>Produto, penteado e espelho. Você só sai quando aprovar o resultado.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ENDEREÇO. Endereço, telefone e horários são exemplos: troque pelos reais. -->
+  <section class="section" id="endereco" aria-labelledby="end-t">
+    <div class="wrap">
+      <header class="section-head" data-reveal>
+        <h2 id="end-t">Onde a gente <i>fica</i></h2>
+        <p class="lead">Quem tem hora marcada passa na frente. Veja o endereço e os horários de atendimento.</p>
+      </header>
+      <div class="addr-grid">
+        <div class="info" data-reveal>
+          <div><h3>Endereço</h3><p class="address">Rua das Marés, 128<span>Centro, Sua Cidade, UF · CEP 00000-000</span></p></div>
+          <div>
+            <h3>Horário de atendimento</h3>
+            <table class="hours"><tbody>
+              <tr data-days="1,2,3,4,5"><th scope="row">Segunda a sexta</th><td>09h às 20h</td></tr>
+              <tr data-days="6"><th scope="row">Sábado</th><td>08h às 18h</td></tr>
+              <tr data-days="0"><th scope="row">Domingo</th><td>Fechado</td></tr>
+            </tbody></table>
+          </div>
+          <div>
+            <h3>WhatsApp</h3>
+            <div class="contact-line"><span class="phone" id="phone">(00) 00000-0000</span><button class="copy" type="button" id="copyBtn">Copiar</button><span class="sr-only" id="copyMsg" role="status" aria-live="polite"></span></div>
+          </div>
+          <div><h3>Pagamento</h3><p style="color:var(--muted)">Pix, cartão de débito e crédito, e dinheiro.</p></div>
+        </div>
+        <div class="map-card" data-reveal>
+          <svg viewBox="0 0 400 330" role="img" aria-label="Mapa ilustrativo do bairro com a barbearia na Rua das Marés">
+            <rect class="m-street" width="400" height="330"/>
+            <g class="m-block">
+              <rect x="16" y="16" width="84" height="64" rx="3"/><rect x="116" y="16" width="84" height="64" rx="3"/><rect x="216" y="16" width="84" height="64" rx="3"/><rect x="316" y="16" width="68" height="64" rx="3"/>
+              <rect x="16" y="104" width="84" height="64" rx="3"/><rect x="116" y="104" width="84" height="64" rx="3"/><rect x="216" y="104" width="84" height="64" rx="3"/><rect x="316" y="104" width="68" height="64" rx="3"/>
+              <rect x="16" y="192" width="84" height="56" rx="3"/><rect x="116" y="192" width="84" height="56" rx="3"/><rect x="216" y="192" width="84" height="56" rx="3"/><rect x="316" y="192" width="68" height="56" rx="3"/>
+            </g>
+            <path class="m-ave" stroke-width="20" d="M-10 236 C120 200 250 120 410 70"/>
+            <path class="m-water" d="M0 274 C70 258 130 292 210 278 C290 264 340 288 400 270 L400 330 L0 330Z"/>
+            <text class="m-label" x="22" y="97">Rua das Marés</text><text class="m-label" x="222" y="187">Av. do Porto</text>
+            <g transform="translate(236 130)">
+              <ellipse class="pin-pulse" cx="0" cy="14" rx="14" ry="5" fill="#1B3B8A" opacity=".4"/>
+              <path class="m-pin pin-body" d="M0-30C-11-30-18-22-18-12C-18 0 0 14 0 14S18 0 18-12C18-22 11-30 0-30Z"/>
+              <circle class="m-dot" cx="0" cy="-13" r="6"/>
+            </g>
+          </svg>
+          <div class="map-foot"><p>Rua das Marés, 128 · Centro</p><a class="btn btn-blue" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+das+Mares+128" target="_blank" rel="noopener">Abrir no mapa</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO. Troque o número do WhatsApp (5500000000000) nos links e em WA, no script. -->
+  <section class="section contact on-blue" id="contato" aria-labelledby="ct-t">
+    <div class="wrap">
+      <header class="section-head" data-reveal>
+        <h2 id="ct-t">Fala com o <i>Cleitinho</i></h2>
+        <p class="lead">Tire dúvidas, peça para remarcar ou acompanhe os cortes da semana.</p>
+      </header>
+      <div class="contact-grid">
+        <a class="panel panel-wa" href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20Cleitinho!" target="_blank" rel="noopener" data-reveal>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.3A8.5 8.5 0 1 1 8 19.3z"/><path d="M9.2 8.4c.3-.5.8-.5 1.1 0l.8 1.4c.2.4 0 .7-.3 1-.3.3-.3.6-.1 1 .6.9 1.6 1.8 2.6 2.3.4.2.7.1 1-.2.3-.3.6-.4.9-.2l1.3.8c.5.3.4.8-.2 1.3-.9.8-2.2.9-3.5.4-2.4-1-4.4-3.1-5-5.4-.2-.9.1-1.8.9-2.2z"/></svg>
+          <span class="panel-title">Chame no WhatsApp</span>
+          <span class="panel-text">Para dúvidas, remarcar um horário ou falar direto com a barbearia.</span>
+          <span class="panel-go">Abrir conversa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="panel panel-ig" href="https://www.instagram.com/cleitinbarber/" target="_blank" rel="noopener" data-reveal>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <span class="panel-title">Siga no Instagram</span>
+          <span class="handle">@cleitinbarber</span>
+          <span class="panel-text">Cortes, antes e depois e novidades da barbearia.</span>
+          <span class="panel-go">Abrir o perfil <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span class="footer-name" aria-hidden="true">Cleitinho Barber</span>
+    <div class="footer-row">
+      <span>© <span id="year">2026</span> Cleitinho Barber · Rua das Marés, 128 · Centro</span>
+      <nav class="footer-links" aria-label="Redes">
+        <a href="https://wa.me/5500000000000" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.instagram.com/cleitinbarber/" target="_blank" rel="noopener">Instagram</a>
+        <a href="#topo">Voltar ao topo</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<div class="flow" id="flow" role="dialog" aria-modal="true" aria-labelledby="flowTitle" hidden>
+  <div class="flow-top">
+    <button class="flow-btn" id="flowBack" type="button" aria-label="Voltar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="flow-head">
+      <span class="flow-count" id="flowCount">Passo 1 de 4</span>
+      <h2 id="flowTitle" tabindex="-1">Escolha o corte</h2>
+    </div>
+    <button class="flow-btn" id="flowClose" type="button" aria-label="Fechar agendamento"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="flow-prog" id="flowProg" aria-hidden="true"><span id="flowBar"></span></div>
+
+  <div class="flow-body" id="flowBody">
+    <div class="flow-in">
+
+      <!-- Passo 1: cortes -->
+      <section class="fstep" data-step="1" aria-label="Escolha o corte">
+        <div class="f1">
+          <div class="f1-main">
+            <div class="filters" role="group" aria-label="Filtrar serviços">
+              <button class="chip" type="button" data-filter="todos" aria-pressed="true">Todos</button>
+              <button class="chip" type="button" data-filter="cabelo" aria-pressed="false">Cabelo</button>
+              <button class="chip" type="button" data-filter="barba" aria-pressed="false">Barba e rosto</button>
+              <button class="chip" type="button" data-filter="combo" aria-pressed="false">Combos</button>
+            </div>
+            <ul class="cards" id="cards"></ul>
+          </div>
+          <section class="refs" aria-labelledby="refT">
+            <h3 id="refT">Cortes para se inspirar</h3>
+            <div class="refs-list">
+              <button class="ref" type="button" data-svc="combo" aria-pressed="false"><img src="corte2.jpg" alt="Degradê com topete e barba cheia" style="object-position:50% 35%"><span>Degradê e barba</span></button>
+              <button class="ref" type="button" data-svc="degrade" aria-pressed="false"><img src="corte3.jpg" alt="Degradê com topete texturizado"><span>Degradê</span></button>
+              <button class="ref" type="button" data-svc="navalhado" aria-pressed="false"><img src="corte4.jpg" alt="Corte com risco na navalha"><span>Navalhado</span></button>
+              <button class="ref" type="button" data-svc="pezinho" aria-pressed="false"><img src="corte1.jpg" alt="Corte baixo com risquinho"><span>Risquinho</span></button>
+            </div>
+            <p class="refs-note">Toque na foto para adicionar o serviço.</p>
+          </section>
+        </div>
+      </section>
+
+      <!-- Passo 2: barbeiro -->
+      <section class="fstep" data-step="2" aria-label="Escolha o barbeiro" hidden>
+        <p class="swipe-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Deslize para o lado e toque em quem vai cortar seu cabelo</p>
+        <div class="swipe">
+          <button class="sw-arrow l" id="swPrev" type="button" aria-label="Barbeiro anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <div class="swipe-track" id="swipe" role="group" aria-label="Barbeiros"></div>
+          <button class="sw-arrow r" id="swNext" type="button" aria-label="Próximo barbeiro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="swipe-dots" id="swipeDots" aria-hidden="true"></div>
+      </section>
+
+      <!-- Passo 3: dia e horário -->
+      <section class="fstep" data-step="3" aria-label="Dia e horário" hidden>
+        <div class="f3">
+          <div class="fcard">
+            <div class="cal-head">
+              <div class="cal-title" id="calTitle" aria-live="polite"></div>
+              <div class="cal-nav">
+                <button type="button" id="calPrev" aria-label="Mês anterior"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+                <button type="button" id="calNext" aria-label="Próximo mês"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+              </div>
+            </div>
+            <div class="cal-grid" id="calGrid" role="group" aria-label="Dias do mês"></div>
+            <div class="cal-legend"><span><i style="border:2px solid var(--gold)"></i>Hoje</span><span><i style="background:var(--blue)"></i>Dia escolhido</span><span>Domingos fechados</span></div>
+          </div>
+          <div class="fcard">
+            <h3 class="fcard-t">Horários livres</h3>
+            <div id="slotsBox" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Passo 4: dados e conferência -->
+      <section class="fstep" data-step="4" aria-label="Seus dados" hidden>
+        <div class="f4">
+          <div class="fcard">
+            <div class="field"><label for="fName">Nome</label><input id="fName" type="text" autocomplete="name" placeholder="Seu nome" maxlength="60"><small id="eName"></small></div>
+            <div class="field"><label for="fPhone">WhatsApp</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="16"><small id="ePhone"></small></div>
+            <div id="confirmMsg" role="status"></div>
+          </div>
+          <aside class="summary" aria-labelledby="sumT">
+            <h3 id="sumT">Confira seu agendamento</h3>
+            <dl class="sum-rows">
+              <div class="sum-row"><dt>Serviços</dt><dd id="sumServ">&ndash;</dd></div>
+              <div class="sum-row"><dt>Barbeiro</dt><dd id="sumBarber">&ndash;</dd></div>
+              <div class="sum-row"><dt>Dia</dt><dd id="sumDay">&ndash;</dd></div>
+              <div class="sum-row"><dt>Horário</dt><dd id="sumTime">&ndash;</dd></div>
+              <div class="sum-row"><dt>Duração</dt><dd id="sumDur">&ndash;</dd></div>
+            </dl>
+            <div class="sum-total"><span>Total</span><b id="sumTotal">R$ 0</b></div>
+            <p class="sum-note">O pagamento é feito na barbearia, em Pix, cartão ou dinheiro.</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Concluído -->
+      <section class="fdone" id="flowDone" aria-live="polite" hidden>
+        <div class="done-ic" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path d="M15 27l8 8 15-17"/></svg></div>
+        <h2 class="done-t" tabindex="-1" id="doneTitle">Agendamento concluído</h2>
+        <p class="done-when" id="doneWhen"></p>
+        <dl class="done-rows">
+          <div><dt>Serviços</dt><dd id="doneServ"></dd></div>
+          <div><dt>Barbeiro</dt><dd id="doneBarber"></dd></div>
+          <div><dt>Total</dt><dd id="doneTotal"></dd></div>
+        </dl>
+        <p class="done-note" id="doneNote"></p>
+        <div class="done-actions">
+          <a class="btn btn-ok" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+das+Mares+128" target="_blank" rel="noopener">Ver como chegar</a>
+          <button class="btn btn-line" type="button" id="doneClose">Fechar</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="flow-foot" id="flowFoot">
+    <div class="flow-foot-in">
+      <div class="flow-sum"><b id="footTotal">R$ 0</b><span id="footSub">Nenhum serviço escolhido</span></div>
+      <button class="btn btn-blue" id="nextBtn" type="button" disabled>Continuar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var WA = '5500000000000'; /* troque pelo número real, com 55 e DDD */
+  var $ = function(id){ return document.getElementById(id); };
+  var HOURS = {0:null,1:[9,20],2:[9,20],3:[9,20],4:[9,20],5:[9,20],6:[8,18]};
+  var DAYS = ['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+  var MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  var STEP = 30, MAX_DAYS = 60;
+  var BARBERS = [1,2,3,4]; /* troque os nomes aqui */
+  function barberName(b){ return b == null ? '–' : 'Barbeiro ' + b; }
+
+  $('year').textContent = new Date().getFullYear();
+
+  var IC = {
+    scissors:'<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.5 7.7L20 18M8.5 16.3L20 6"/>',
+    clipper:'<rect x="7" y="3" width="10" height="13" rx="2"/><path d="M9 8h6M9 11h6M10 16v5M14 16v5"/>',
+    razor:'<path d="M3 15l11-9 3 3-11 9z"/><path d="M14 6l3-2 3 3-2 3"/>',
+    comb:'<rect x="3" y="7" width="18" height="6" rx="1.5"/><path d="M6 13v5M9 13v5M12 13v5M15 13v5M18 13v5"/>',
+    kid:'<circle cx="12" cy="9" r="5"/><path d="M8.5 7.5C10 5.5 14 5.5 15.5 7.5M5 20c1-3.5 4-5 7-5s6 1.5 7 5"/>',
+    drop:'<path d="M12 3s6 6.2 6 10.5A6 6 0 0 1 6 13.5C6 9.2 12 3 12 3z"/>',
+    beard:'<path d="M5 9c0 7 3 11 7 11s7-4 7-11"/><path d="M8.5 14c2-1.6 5-1.6 7 0"/><path d="M5 9c1-4 4-6 7-6s6 2 7 6"/>',
+    brow:'<path d="M3 13c3-5 9-7 18-3"/><path d="M5 17c3-2 7-3 14-1"/>',
+    star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>'
+  };
+  /* Serviços (valores de exemplo) */
+  var S = [
+    {id:'social',name:'Corte social',cat:'cabelo',price:45,min:40,ic:'scissors',desc:'Tesoura e máquina, laterais baixas e penteado do jeito que você gosta.'},
+    {id:'degrade',name:'Degradê',cat:'cabelo',price:50,min:45,ic:'clipper',desc:'Transição suave das laterais para o topo, finalizada na navalha.',tag:'Mais pedido'},
+    {id:'navalhado',name:'Corte navalhado',cat:'cabelo',price:55,min:50,ic:'razor',desc:'Contorno e laterais na navalha, linhas retas e acabamento limpo.'},
+    {id:'infantil',name:'Infantil',cat:'cabelo',price:40,min:30,ic:'kid',desc:'Para crianças até 10 anos, com paciência e sem pressa.'},
+    {id:'pezinho',name:'Pezinho e acabamento',cat:'cabelo',price:15,min:10,ic:'comb',desc:'Nuca, costeletas e contorno para manter o corte entre uma visita e outra.'},
+    {id:'pigmento',name:'Pigmentação',cat:'cabelo',price:35,min:25,ic:'drop',desc:'Preenche falhas no cabelo ou na barba com cor natural.'},
+    {id:'barba',name:'Barba completa',cat:'barba',price:40,min:30,ic:'beard',desc:'Toalha quente, óleo, desenho e navalha. A barba sai macia e alinhada.'},
+    {id:'barba2',name:'Barba desenhada',cat:'barba',price:30,min:20,ic:'razor',desc:'Ajuste de volume e contorno, para quem só quer manter o formato.'},
+    {id:'sobrancelha',name:'Sobrancelha na navalha',cat:'barba',price:15,min:10,ic:'brow',desc:'Limpeza e alinhamento, sem exagero.'},
+    {id:'combo',name:'Corte + barba',cat:'combo',price:80,min:75,ic:'scissors',desc:'Corte social ou degradê com barba completa no mesmo horário.'},
+    {id:'completo',name:'Completo',cat:'combo',price:95,min:90,ic:'star',desc:'Degradê, barba completa e sobrancelha. Você sai pronto para qualquer ocasião.',tag:'Experiência completa',feature:true}
+  ];
+  var byId = {}; S.forEach(function(s){ byId[s.id] = s; });
+  var sel = [];
+  var CHECK = '<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>';
+
+  function fmtMin(m){ var h = Math.floor(m/60), r = m%60; if(!h) return r+' min'; return h+'h'+(r?(r<10?'0'+r:r):''); }
+  function pad(n){ return n<10 ? '0'+n : ''+n; }
+  function hhmm(m){ return pad(Math.floor(m/60))+':'+pad(m%60); }
+  function ymd(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function totals(){ var p=0,m=0; sel.forEach(function(id){ p+=byId[id].price; m+=byId[id].min; }); return {price:p,min:m}; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  var state = {step:1, view:null, date:null, time:null, taken:[], db:null, unsub:null, barber:null, done:false};
+  var today = new Date(); today.setHours(0,0,0,0);
+  state.view = new Date(today.getFullYear(), today.getMonth(), 1);
+  var lastDay = new Date(today); lastDay.setDate(lastDay.getDate() + MAX_DAYS);
+
+  /* Cards dos cortes */
+  var cards = $('cards');
+  S.forEach(function(s){
+    var li = document.createElement('li');
+    li.dataset.cat = s.cat;
+    if (s.feature) li.className = 'span-feature';
+    li.innerHTML = '<button class="card' + (s.feature ? ' feature' : '') + '" type="button" aria-pressed="false" data-id="' + s.id + '">' +
+      (s.tag ? '<span class="tag">' + s.tag + '</span>' : '') +
+      '<span class="card-ic"><svg viewBox="0 0 24 24" aria-hidden="true">' + IC[s.ic] + '</svg></span>' +
+      '<span class="card-name">' + s.name + '</span>' +
+      '<span class="card-desc">' + s.desc + '</span>' +
+      '<span class="card-foot"><span><span class="card-price"><small>R$</small>' + s.price + '</span><span class="card-time">' + fmtMin(s.min) + '</span></span>' +
+      '<span class="card-pick">' + CHECK + '<span class="pk-t">Escolher</span></span></span></button>';
+    cards.appendChild(li);
+  });
+  cards.addEventListener('click', function(e){ var b = e.target.closest('.card'); if (b) toggle(b.dataset.id); });
+  document.querySelector('.refs-list').addEventListener('click', function(e){
+    var r = e.target.closest('.ref'); if (r) toggle(r.dataset.svc, true);
+  });
+  function toggle(id, onlyAdd){
+    var i = sel.indexOf(id);
+    if (i > -1){ if (onlyAdd) return; sel.splice(i,1); } else sel.push(id);
+    state.time = null; renderAll();
+  }
+  var chips = document.querySelectorAll('.chip');
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var cat = c.dataset.filter, vis = [];
+      chips.forEach(function(x){ x.setAttribute('aria-pressed', String(x === c)); });
+      Array.prototype.forEach.call(cards.children, function(li){
+        var show = cat === 'todos' || li.dataset.cat === cat; li.hidden = !show; if (show) vis.push(li.firstChild);
+      });
+      if (window.gsap && !reduce) gsap.fromTo(vis, {y:14, opacity:0}, {y:0, opacity:1, duration:.3, stagger:.03, ease:'power3.out', overwrite:true, clearProps:'transform,opacity'});
+    });
+  });
+
+  /* Barbeiros: carrossel de deslizar */
+  function barberArt(i){
+    var skin = ['#E8B995','#C58A62','#8A5A3C','#F0C9A8'][i-1], H = 'fill="#161B30"';
+    var hairs = [
+      '<path ' + H + ' d="M60 92C52 54 74 36 100 36C128 36 148 54 140 92C136 76 126 68 100 66C76 66 64 76 60 92Z"/>',
+      '<path ' + H + ' d="M58 94C44 48 68 24 106 26C142 30 158 58 142 94C140 74 128 60 108 57C88 55 66 66 58 94Z"/>',
+      '<path ' + H + ' d="M60 90C56 58 76 46 100 46C124 46 144 58 140 90C136 76 126 70 100 70C74 70 64 76 60 90Z"/><path ' + H + ' opacity=".4" d="M58 92V114l7-8V86Z"/><path ' + H + ' opacity=".4" d="M142 92V114l-7-8V86Z"/>',
+      '<path ' + H + ' d="M58 94C50 50 74 32 102 34C132 36 150 56 142 94C140 78 134 68 122 62C108 66 84 64 70 76C64 82 60 88 58 94Z"/>'
+    ][i-1];
+    var beard = (i === 2 || i === 4) ? '<path ' + H + ' d="M58 112C56 150 74 166 100 166C126 166 144 150 142 112C138 130 128 138 100 138C72 138 62 130 58 112Z"/><path ' + H + ' d="M82 128C92 121 108 121 118 128C108 133 92 133 82 128Z"/>' : '';
+    var mouth = beard ? '' : '<path d="M90 134q10 7 20 0" stroke="rgba(0,0,0,.35)" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    return '<svg viewBox="0 0 200 200" role="img" aria-label="Ilustração do barbeiro ' + i + '"><rect width="200" height="200" fill="none"/>' +
+      '<path d="M16 200C16 170 48 160 100 160S184 170 184 200Z" fill="#1B3B8A"/><path d="M80 160L100 184L120 160" fill="#fff"/>' +
+      '<rect x="86" y="132" width="28" height="34" rx="12" fill="' + skin + '"/><ellipse cx="100" cy="100" rx="42" ry="50" fill="' + skin + '"/>' +
+      '<circle cx="58" cy="104" r="8" fill="' + skin + '"/><circle cx="142" cy="104" r="8" fill="' + skin + '"/>' +
+      '<circle cx="85" cy="102" r="3.2" ' + H + '/><circle cx="115" cy="102" r="3.2" ' + H + '/>' +
+      '<path d="M76 92q9-5 18-1M106 91q9-4 18 1" stroke="#161B30" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+      '<path d="M100 106q-5 12 0 15" stroke="rgba(0,0,0,.25)" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+      mouth + beard + hairs + '</svg>';
+  }
+  var track = $('swipe'), dotsBox = $('swipeDots');
+  BARBERS.forEach(function(b){
+    var c = document.createElement('div');
+    c.className = 'bcard'; c.dataset.b = b;
+    c.innerHTML = '<div class="bart">' + barberArt(b) + '</div><h3>' + barberName(b) + '</h3><p>Corte, barba e acabamento</p><button class="bpick" type="button" aria-pressed="false">Escolher</button>';
+    track.appendChild(c);
+    dotsBox.appendChild(document.createElement('i'));
+  });
+  track.addEventListener('click', function(e){
+    var c = e.target.closest('.bcard'); if (!c) return;
+    state.barber = +c.dataset.b; state.time = null;
+    c.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', inline:'center', block:'nearest'});
+    renderAll();
+  });
+  var raf = 0;
+  function updateSwipe(){
+    raf = 0;
+    var tr = track.getBoundingClientRect(), mid = tr.left + tr.width/2, best = 0, bd = 1e9;
+    Array.prototype.forEach.call(track.children, function(c, i){
+      var r = c.getBoundingClientRect(), d = Math.abs(r.left + r.width/2 - mid), n = d / (r.width || 1);
+      c.style.setProperty('--s', Math.max(.86, 1 - n*.14).toFixed(3));
+      c.style.setProperty('--o', Math.max(.5, 1 - n*.5).toFixed(3));
+      if (d < bd){ bd = d; best = i; }
+    });
+    Array.prototype.forEach.call(dotsBox.children, function(d, i){ d.classList.toggle('cur', i === best); });
+  }
+  track.addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(updateSwipe); }, {passive:true});
+  function swipeBy(dir){ var w = track.firstChild.getBoundingClientRect().width + 16; track.scrollBy({left: dir * w, behavior: reduce ? 'auto' : 'smooth'}); }
+  $('swPrev').addEventListener('click', function(){ swipeBy(-1); });
+  $('swNext').addEventListener('click', function(){ swipeBy(1); });
+
+  /* Calendário */
+  function renderCal(){
+    var v = state.view;
+    $('calTitle').textContent = MONTHS[v.getMonth()] + ' ' + v.getFullYear();
+    var g = $('calGrid'); g.innerHTML = '';
+    ['D','S','T','Q','Q','S','S'].forEach(function(l){
+      var d = document.createElement('div'); d.className = 'cal-dow'; d.textContent = l; d.setAttribute('aria-hidden','true'); g.appendChild(d);
+    });
+    var first = new Date(v.getFullYear(), v.getMonth(), 1).getDay();
+    for (var i = 0; i < first; i++) g.appendChild(document.createElement('div'));
+    var n = new Date(v.getFullYear(), v.getMonth()+1, 0).getDate();
+    for (var d = 1; d <= n; d++){
+      var dt = new Date(v.getFullYear(), v.getMonth(), d);
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'day'; b.textContent = d;
+      var off = dt < today || dt > lastDay || !HOURS[dt.getDay()];
+      b.disabled = off;
+      b.setAttribute('aria-label', d + ' de ' + MONTHS[dt.getMonth()] + ', ' + DAYS[dt.getDay()] + (off ? ', indisponível' : ''));
+      if (dt.getTime() === today.getTime()) b.classList.add('today');
+      b.setAttribute('aria-pressed', String(!!(state.date && dt.getTime() === state.date.getTime())));
+      b.dataset.t = dt.getTime();
+      g.appendChild(b);
+    }
+    $('calPrev').disabled = v.getFullYear() === today.getFullYear() && v.getMonth() === today.getMonth();
+    $('calNext').disabled = new Date(v.getFullYear(), v.getMonth()+1, 1) > lastDay;
+  }
+  $('calGrid').addEventListener('click', function(e){
+    var b = e.target.closest('.day'); if (!b || b.disabled) return;
+    state.date = new Date(+b.dataset.t); state.time = null; subscribeDay(); renderAll();
+  });
+  $('calPrev').addEventListener('click', function(){ state.view = new Date(state.view.getFullYear(), state.view.getMonth()-1, 1); renderCal(); });
+  $('calNext').addEventListener('click', function(){ state.view = new Date(state.view.getFullYear(), state.view.getMonth()+1, 1); renderCal(); });
+
+  function clash(list, a0, a1, b){ return list.some(function(t){ return t.b === b && a0 < t.end && a1 > t.start; }); }
+  function slotFree(a0, a1){ return state.barber != null && !clash(state.taken, a0, a1, state.barber); }
+  function renderSlots(){
+    var box = $('slotsBox');
+    if (!state.date){ box.innerHTML = '<p class="hint">Escolha um dia no calendário para ver os horários do ' + barberName(state.barber).toLowerCase() + '.</p>'; return; }
+    var h = HOURS[state.date.getDay()], dur = totals().min, open = h[0]*60, close = h[1]*60, now = new Date();
+    var isToday = state.date.getTime() === today.getTime(), nowMin = now.getHours()*60 + now.getMinutes() + 30;
+    var html = '', any = false;
+    for (var m = open; m + dur <= close; m += STEP){
+      var busy = !slotFree(m, m + dur) || (isToday && m < nowMin);
+      if (!busy) any = true;
+      html += '<button type="button" class="slot" data-m="' + m + '"' + (busy ? ' disabled' : '') + ' aria-pressed="' + (state.time === m) + '">' + hhmm(m) + '</button>';
+    }
+    box.innerHTML = any ? '<div class="slots">' + html + '</div>' : '<p class="hint">Não há mais horários livres neste dia. Escolha outro dia.</p>';
+  }
+  $('slotsBox').addEventListener('click', function(e){
+    var b = e.target.closest('.slot'); if (!b || b.disabled) return;
+    state.time = +b.dataset.m; renderAll();
+  });
+
+  /* Estado visual de todas as telas */
+  function renderAll(){
+    var t = totals();
+    document.querySelectorAll('.card').forEach(function(c){
+      var on = sel.indexOf(c.dataset.id) > -1; c.setAttribute('aria-pressed', String(on));
+      c.querySelector('.pk-t').textContent = on ? 'Escolhido' : 'Escolher';
+    });
+    document.querySelectorAll('.ref').forEach(function(c){ c.setAttribute('aria-pressed', String(sel.indexOf(c.dataset.svc) > -1)); });
+    Array.prototype.forEach.call(track.children, function(c){
+      var on = state.barber === +c.dataset.b; c.classList.toggle('on', on);
+      var p = c.querySelector('.bpick'); p.setAttribute('aria-pressed', String(on)); p.textContent = on ? 'Escolhido' : 'Escolher';
+    });
+    if (state.time != null && !slotFree(state.time, state.time + t.min)) state.time = null;
+    renderCal(); renderSlots();
+    $('sumServ').textContent = sel.length ? sel.map(function(id){ return byId[id].name; }).join(', ') : '–';
+    $('sumBarber').textContent = barberName(state.barber);
+    $('sumDay').textContent = state.date ? DAYS[state.date.getDay()] + ', ' + state.date.getDate() + ' de ' + MONTHS[state.date.getMonth()] : '–';
+    $('sumTime').textContent = state.time != null ? hhmm(state.time) + ' às ' + hhmm(state.time + t.min) : '–';
+    $('sumDur').textContent = sel.length ? fmtMin(t.min) : '–';
+    $('sumTotal').textContent = 'R$ ' + t.price;
+    $('footTotal').textContent = 'R$ ' + t.price;
+    var sub = sel.length ? sel.length + (sel.length > 1 ? ' serviços' : ' serviço') + ' · ' + fmtMin(t.min) : 'Nenhum serviço escolhido';
+    if (state.step >= 2 && state.barber != null) sub += ' · ' + barberName(state.barber);
+    $('footSub').textContent = sub;
+    updateNext();
+  }
+  function updateNext(){
+    var ok = [false, sel.length > 0, state.barber != null, !!(state.date && state.time != null), true][state.step];
+    var b = $('nextBtn');
+    if (!busyConfirm) b.disabled = !ok;
+    b.textContent = busyConfirm ? 'Reservando...' : (state.step === 4 ? 'Confirmar agendamento' : 'Continuar');
+  }
+
+  /* Navegação do fluxo */
+  var TITLES = ['', 'Escolha o corte', 'Escolha o barbeiro', 'Dia e horário', 'Seus dados'];
+  var flow = $('flow'), opener = null, busyConfirm = false;
+  function goStep(n){
+    state.step = n;
+    document.querySelectorAll('.fstep').forEach(function(s){ s.hidden = +s.dataset.step !== n; });
+    $('flowTitle').textContent = TITLES[n];
+    $('flowCount').textContent = 'Passo ' + n + ' de 4';
+    $('flowBar').style.width = (n * 25) + '%';
+    $('flowBody').scrollTop = 0;
+    if (n === 2) requestAnimationFrame(function(){ var c = track.querySelector('.bcard.on') || track.firstChild; if (c) c.scrollIntoView({inline:'center', block:'nearest'}); updateSwipe(); });
+    if (n === 3) subscribeDay();
+    renderAll();
+    if (n === 1 && window.gsap && !reduce) gsap.fromTo('.card', {y:18, opacity:0}, {y:0, opacity:1, duration:.5, stagger:.04, ease:'power3.out', clearProps:'transform,opacity'});
+    $('flowTitle').focus({preventScroll:true});
+  }
+  function openFlow(from){
+    opener = from || null;
+    flow.hidden = false;
+    root.classList.add('flow-open');
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ flow.classList.add('open'); }); });
+    goStep(state.done ? 1 : state.step);
+  }
+  function closeFlow(){
+    if (flow.hidden) return;
+    if (state.done) resetFlow();
+    flow.classList.remove('open');
+    setTimeout(function(){ flow.hidden = true; root.classList.remove('flow-open'); }, reduce ? 0 : 260);
+    if (opener) opener.focus({preventScroll:true});
+  }
+  function resetFlow(){
+    sel = []; state.barber = null; state.date = null; state.time = null; state.step = 1; state.done = false; busyConfirm = false;
+    $('fName').value = ''; $('fPhone').value = ''; $('confirmMsg').innerHTML = '';
+    $('flowDone').hidden = true; $('flowFoot').hidden = false; $('flowProg').hidden = false;
+    if (state.unsub){ state.unsub(); state.unsub = null; } state.taken = [];
+    goStep(1);
+  }
+  $('flowBack').addEventListener('click', function(){ if (state.done) closeFlow(); else if (state.step > 1) goStep(state.step - 1); else closeFlow(); });
+  $('flowClose').addEventListener('click', closeFlow);
+  $('doneClose').addEventListener('click', closeFlow);
+  $('nextBtn').addEventListener('click', function(){ if (state.step < 4) goStep(state.step + 1); else doConfirm(); });
+  document.querySelectorAll('a[href="#agendar"]').forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); setMenu(false); openFlow(a); });
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ if (!flow.hidden) closeFlow(); else setMenu(false); } });
+
+  /* Agenda compartilhada (capacidade db) */
+  function subscribeDay(){
+    if (state.unsub){ state.unsub(); state.unsub = null; }
+    state.taken = [];
+    if (!state.db || !state.date) return;
+    try {
+      state.unsub = state.db.collection('slots').where('date','==',ymd(state.date)).onSnapshot(function(snap){
+        state.taken = snap.docs.map(function(d){ var x = d.data(); return {start:x.start, end:x.end, b:x.barber}; });
+        if (!state.done) renderAll();
+      }, function(){});
+    } catch(e){}
+  }
+  if (window.claude && claude.use) claude.use('db').then(function(db){ state.db = db; if (db && state.date) subscribeDay(); }).catch(function(){});
+
+  function waLink(txt){ return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(txt); }
+  function fieldErr(id, eid, msg){ $(eid).textContent = msg || ''; $(id).setAttribute('aria-invalid', msg ? 'true' : 'false'); return !msg; }
+  $('fPhone').addEventListener('input', function(e){
+    var d = e.target.value.replace(/\D/g,'').slice(0,11), cut = d.length > 10 ? 7 : 6, o = d;
+    if (d.length > 2) o = '(' + d.slice(0,2) + ') ' + d.slice(2, cut) + (d.length > cut ? '-' + d.slice(cut) : '');
+    e.target.value = o;
+  });
+
+  function doConfirm(){
+    if (busyConfirm) return;
+    var name = $('fName').value.trim(), phone = $('fPhone').value.replace(/\D/g,'');
+    var ok1 = fieldErr('fName','eName', name.length < 2 ? 'Digite seu nome.' : '');
+    var ok2 = fieldErr('fPhone','ePhone', phone.length < 10 ? 'Digite o DDD e o número.' : '');
+    if (!ok1 || !ok2){ (ok1 ? $('fPhone') : $('fName')).focus(); return; }
+    var t = totals(), key = ymd(state.date), start = state.time, end = start + t.min, who = state.barber;
+    var names = sel.map(function(id){ return byId[id].name; });
+    busyConfirm = true; updateNext();
+    var msg = $('confirmMsg'); msg.innerHTML = '';
+    function fail(text){
+      busyConfirm = false; updateNext();
+      var txt = 'Olá, Cleitinho! Quero agendar ' + names.join(', ') + ' em ' + state.date.getDate() + '/' + (state.date.getMonth()+1) + ' às ' + hhmm(start) + ' com ' + barberName(who).toLowerCase() + '. Meu nome é ' + name + '.';
+      msg.innerHTML = '<p class="msg">' + text + ' <a href="' + waLink(txt) + '" target="_blank" rel="noopener">Pedir esse horário no WhatsApp</a></p>';
+    }
+    if (!state.db){ fail('A agenda do site não está disponível neste momento.'); return; }
+    var lock = state.db.doc('locks/' + key), holder = 'v' + Math.random().toString(36).slice(2);
+    function attempt(retry){
+      lock.acquire({holder:holder, ttlMs:5000}).then(function(r){
+        if (!r.acquired){ if (retry){ setTimeout(function(){ attempt(false); }, 1200); return; } fail('Alguém está reservando agora. Tente de novo em instantes.'); return; }
+        return state.db.collection('slots').where('date','==',key).get().then(function(snap){
+          var list = snap.docs.map(function(d){ var x = d.data(); return {start:x.start, end:x.end, b:x.barber}; });
+          if (clash(list, start, end, who)){ state.time = null; state.taken = list; busyConfirm = false; goStep(3); return; }
+          return state.db.doc('slots/' + key + '_' + pad(Math.floor(start/60)) + pad(start%60) + '_b' + who).set({date:key, start:start, end:end, barber:who, name:name, phone:phone, services:names, total:t.price, createdAt:Date.now()}).then(function(){
+            success(name, names, t, start, who);
+          });
+        });
+      }).catch(function(){ fail('Não consegui registrar na agenda agora.'); });
+    }
+    attempt(true);
+  }
+
+  function success(name, names, t, start, who){
+    busyConfirm = false; state.done = true;
+    document.querySelectorAll('.fstep').forEach(function(s){ s.hidden = true; });
+    $('flowFoot').hidden = true; $('flowProg').hidden = true;
+    $('flowTitle').textContent = 'Tudo certo'; $('flowCount').textContent = 'Passo 4 de 4';
+    $('doneWhen').textContent = DAYS[state.date.getDay()] + ', ' + state.date.getDate() + ' de ' + MONTHS[state.date.getMonth()] + ' às ' + hhmm(start);
+    $('doneServ').textContent = names.join(', ');
+    $('doneBarber').textContent = barberName(who);
+    $('doneTotal').textContent = 'R$ ' + t.price + ' · ' + fmtMin(t.min);
+    $('doneNote').textContent = name + ', seu horário está na agenda. Chegue com 5 minutos de antecedência. Para remarcar, chame no WhatsApp.';
+    $('flowDone').hidden = false; $('flowBody').scrollTop = 0;
+    $('doneTitle').focus({preventScroll:true});
+  }
+
+
+  /* Cabeçalho aparece depois da capa */
+  var header = $('siteHeader'), cover = document.querySelector('.cover');
+  var btn = $('menuBtn'), panel = $('navPanel');
+  function setMenu(open){ btn.setAttribute('aria-expanded', String(open)); btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu'); panel.classList.toggle('open', open); }
+  function onScroll(){ header.classList.toggle('show', window.scrollY > cover.offsetHeight * .6); if (!header.classList.contains('show')) setMenu(false); }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  btn.addEventListener('click', function(){ setMenu(btn.getAttribute('aria-expanded') !== 'true'); });
+  panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  window.addEventListener('resize', function(){ if (window.innerWidth >= 860) setMenu(false); updateSwipe(); });
+  onScroll();
+
+  (function(){
+    var d = new Date().getDay();
+    document.querySelectorAll('.hours tr').forEach(function(tr){ if (tr.dataset.days.split(',').indexOf(String(d)) > -1) tr.classList.add('today'); });
+  })();
+
+  var copyBtn = $('copyBtn'), msgEl = $('copyMsg'), phoneEl = $('phone');
+  copyBtn.addEventListener('click', function(){
+    function sel2(){ var r = document.createRange(); r.selectNodeContents(phoneEl); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+    function done(ok){ copyBtn.textContent = ok ? 'Copiado' : 'Selecionado'; msgEl.textContent = ok ? 'Número copiado' : 'Número selecionado'; setTimeout(function(){ copyBtn.textContent = 'Copiar'; }, 1800); }
+    try { navigator.clipboard.writeText(phoneEl.textContent.trim()).then(function(){ done(true); }, function(){ sel2(); done(false); }); } catch(e){ sel2(); done(false); }
+  });
+
+  renderAll();
+
+  /* GSAP */
+  if (!window.gsap || !window.ScrollTrigger || reduce){ root.classList.remove('anim'); return; }
+  gsap.registerPlugin(ScrollTrigger);
+  var ready = false;
+  setTimeout(function(){ if (!ready) root.classList.remove('anim'); }, 4000);
+  var tl = gsap.timeline({defaults:{ease:'expo.out'}});
+  tl.fromTo('.cv-logo', {scale:.8, opacity:0}, {scale:1, opacity:1, duration:.9})
+    .fromTo('.cv-name', {clipPath:'inset(-25% 100% -25% -5%)'}, {clipPath:'inset(-25% -8% -25% -5%)', duration:1.5, ease:'power3.inOut'}, '-=.4')
+    .fromTo('.cv-sub svg', {scaleX:0}, {scaleX:1, duration:.9}, '-=.5')
+    .fromTo('.cv-sub span', {x:-14, opacity:0}, {x:0, opacity:1, duration:.8}, '-=.7')
+    .fromTo('.cv-cta,.cv-more', {y:20, opacity:0}, {y:0, opacity:1, duration:.8, stagger:.1}, '-=.5');
+  ready = true;
+  gsap.utils.toArray('[data-reveal]').forEach(function(el){
+    gsap.fromTo(el, {y:28, opacity:0}, {y:0, opacity:1, duration:.8, ease:'power3.out', clearProps:'transform', scrollTrigger:{trigger:el, start:'top 92%', once:true}});
+  });
+  gsap.utils.toArray('.proc li').forEach(function(li, i){
+    gsap.fromTo(li.querySelector('.proc-fill'), {scaleX:0}, {scaleX:1, duration:.9, delay:i*.08, ease:'expo.out', scrollTrigger:{trigger:li, start:'top 90%', once:true}});
+  });
+  gsap.to('.pin-pulse', {scale:2.2, opacity:0, transformOrigin:'50% 50%', duration:1.8, repeat:-1, ease:'power1.out'});
+  gsap.fromTo('.pin-body', {y:-18, opacity:0}, {y:0, opacity:1, duration:.7, ease:'bounce.out', scrollTrigger:{trigger:'.map-card', start:'top 80%', once:true}});
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+})();
+</script>
+
+</body></html>
